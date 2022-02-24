@@ -1,0 +1,109 @@
+{% extends "app1/base.html" %}
+
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row"><br>
+    <div class="col-3 bg-light mx-auto m-4">
+        <div class="row bg-success">
+             <div class="col-sm-12"  style="margin-top:8px;">
+            <center><h1  class="text-white"><strong>Education</strong></h1></center>
+        </div>
+        </div>
+
+
+      <hr> <hr><br><br>
+       <h1>If You Want Join Our Family</h1>
+      <h3><a href="{% url 'signup' %}" class="">Click Here</a></h3>
+      <br><br><br>
+      <h1>Have You Already Member of our Family.</h1>
+      <h3><a href="{% url 'login' %}" class="">Welcome</a></h3>
+    </div>
+
+
+
+    <div class="col-8 bg-light mx-auto m-4 ">
+    <!--Main layout-->
+      <main class="my-2">
+    <div class="container">
+      <!--Section: Content-->
+
+
+
+
+
+        <div class="row bg-success">
+               <div class="col-sm-12" style="margin-top:1px;">
+                             <h1 class="mb-3 text-white" style="margin-left:250px; "><strong>Latest Posts</strong></h1>
+
+                   </div>
+          </div><hr><hr><br>
+
+      <div class="row">
+
+          {% for x in data %}
+
+            <div class="col-sm-4">
+                   <div class="bg.light">
+            <small class="text-danger h3" style="margin-left:10px; ">Title : {{x.title|capfirst}}</small>
+            </div>
+
+              <div class="card m-2">
+                    <img  src="{{x.image.url}}" alt="Free" class="card-img-top" height="200px">
+              </div>
+
+              <div class="mx-auto text-primary">
+                  <small style="margin-left:5px; ">Discription: {{x.discription|capfirst}}</small>
+              </div>
+
+              <div >
+                 <a href="singlepost/{{x.id}}" class="text-success " style="margin-left:5px; ">Read</a>
+                    <a href="/delete/{{x.id}}">delete</a>
+              </div>
+
+            </div>
+
+          {% endfor %}
+      </div>
+
+
+      <!-- Pagination -->
+<!--      <nav class="my-4" aria-label="...">-->
+<!--        <ul class="pagination pagination-circle justify-content-center">-->
+<!--          <li class="page-item">-->
+<!--            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>-->
+<!--          </li>-->
+<!--          <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--          <li class="page-item active" aria-current="page">-->
+<!--            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>-->
+<!--          </li>-->
+<!--          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--          <li class="page-item">-->
+<!--            <a class="page-link" href="#">Next</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </nav>-->
+
+
+    <center>
+        {%if data.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{page_obj.previous_page_number}}">Previous</a> {# link to the prev page #}
+        {% endif %}
+        <span>{{data.number}}</span> {# the current page number #}
+
+        {%if data.has_next %} {# whether the next page exists #}
+            <a href="?page={{data.next_page_number}}">Next</a> {# link to the next page #}
+        {% endif %}
+    </center>
+
+    </div>
+  </main>
+  <!--Main layout-->
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

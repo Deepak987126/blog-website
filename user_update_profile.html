@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container-fluid">
+<center><table>
+    <h3 class="text-primary">Update Your Profile</h3><br>
+   <form method="POST", action="update_profile" novalidate>
+       {% csrf_token %}
+       <tbody>
+          {% for form in form %}
+            <tr style="margin-top:3px;">
+                <td>{{form.label_tag}}</td>
+                <td >{{form}}</td>
+                <td><p style="color:red;">{{form.errors|striptags }}</p></td>
+            </tr>
+          {% endfor %}
+            <tr>
+                <td><td> <input type="submit" value="Save" style="margin-left:0px; margin-top:5px;"  class="btn btn-success" role="button">
+<!--                <a href="{% url 'login' %}"  class="btn btn-success" role="button" style="margin-left:7px; margin-top:5px;"> LogIn</a></td></td>-->
+            </tr>
+       </tbody>
+    </form>
+
+
+</table>
+    </center>
+</div>
+
+
+</body>
+</html>
